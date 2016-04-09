@@ -5,6 +5,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-browserify');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-connect');
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -36,6 +37,17 @@ module.exports = function (grunt) {
             }
         },
 
+        connect: {
+            serve: {
+                options: {
+                    port: 8080,
+                    protocol: 'http',
+                    base: 'dist',
+                    useAvailablePort: true
+                }
+            }
+        },
+
         copy: {
             client: {
                 files: [
@@ -50,7 +62,9 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.registerTask('default', ['build:client']);
+    grunt.registerTask('default', ['build']);
+
+    grunt.registerTask('build', ['build:client'])
 
     grunt.registerTask('build:client', 'Build the client application', [
         'clean:tmp',
@@ -58,5 +72,10 @@ module.exports = function (grunt) {
         'babel:client',
         'browserify:client',
         'copy:client'
+    ]);
+
+    grunt.registerTask('serve', 'Stand up a web server to serve application', [
+        'build',
+        'connect:serve:keepalive'
     ]);
 };
