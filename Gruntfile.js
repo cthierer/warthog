@@ -6,6 +6,8 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-connect');
+    grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-concurrent');
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -37,12 +39,23 @@ module.exports = function (grunt) {
             }
         },
 
+        concurrent: {
+            serve: {
+                tasks: ['watch:client', 'connect:serve:keepalive'],
+                options: {
+                    logConcurrentOutput: true
+                }
+            }
+        },
+
         connect: {
             serve: {
                 options: {
                     port: 8080,
                     protocol: 'http',
                     base: 'dist',
+                    hostname: 'localhost',
+                    livereload: true,
                     useAvailablePort: true
                 }
             }
@@ -58,6 +71,17 @@ module.exports = function (grunt) {
                         dest: 'dist/'
                     }
                 ]
+            }
+        },
+
+        watch: {
+            // TODO optimize to only build what is necessary for each file type
+            client: {
+                files: ['client/**/*.*'],
+                tasks: ['build:client'],
+                options: {
+                    livereload: true
+                }
             }
         }
     });
@@ -76,6 +100,6 @@ module.exports = function (grunt) {
 
     grunt.registerTask('serve', 'Stand up a web server to serve application', [
         'build',
-        'connect:serve:keepalive'
+        'concurrent:serve'
     ]);
 };
