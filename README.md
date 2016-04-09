@@ -5,14 +5,14 @@ Installing
 ----------
 
   1.  Install package dependencies: `npm install`.
-  2.  Install browserify: `npm install -g browserify`.
+  3.  Install Grunt CLI: `npm install -g grunt-cli`.
 
 Building
 --------
 
-Run browserify: `browserify -t reactify -o dist/script.js`.
+Run: `grunt build:client`.
 
 Running
 -------
 
-Open `index.html` in a browser.
+Open `dist/index.html` in a browser.
