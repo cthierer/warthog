@@ -3,12 +3,13 @@
   "version": "0.0.1",
   "description": "warthog",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "scripts": {},
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bluebird": "^3.3.4",
+    "jquery": "^2.2.3",
+    "lodash": "^4.9.0",
     "react": "^15.0.1",
     "react-dom": "^15.0.1",
     "reactify": "^1.1.1"

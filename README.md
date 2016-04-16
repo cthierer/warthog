@@ -5,7 +5,7 @@ Installing
 ----------
 
   1.  Install package dependencies: `npm install`.
-  3.  Install Grunt CLI: `npm install -g grunt-cli`.
+  2.  Install Grunt CLI: `npm install -g grunt-cli`.
 
 Building
 --------
@@ -15,4 +15,6 @@ Run: `grunt build:client`.
 Running
 -------
 
-Open `dist/index.html` in a browser.
+  1.  Start the server: `node index.js`.
+  2.  Start the client: `node serve`.
+  3.  Load the application in a browser: http://localhost:8080/
